@@ -84,5 +84,5 @@ fn main() {
     let rotator = Rotator::new(13);
 
     let output: String = rotator.rot_str(&input);
-    print!("{}\n", output);
+    print!("{}", output);
 }
