@@ -1,4 +1,4 @@
-const ALPHABET: &'static str = "abcdefghijklmnopqrstuvwxyz";
+const ALPHABET: &str = "abcdefghijklmnopqrstuvwxyz";
 
 fn char_number(c: char) -> u8 {
     let target: char = c.to_ascii_lowercase();
@@ -31,7 +31,7 @@ impl Rotator {
             return c;
         }
         let c_number = char_number(c);
-        let new_c_number = (((c_number as i32 + self.shift) % 26) + 26) % 26;
+        let new_c_number = (((i32::from(c_number) + self.shift) % 26) + 26) % 26;
         let new_char = ALPHABET.chars().nth(new_c_number as usize).unwrap();
         if c.is_uppercase() {
             new_char.to_ascii_uppercase()
@@ -65,7 +65,7 @@ struct Args {
 }
 
 fn parse_args() -> Result<Args, String> {
-    let argv: Vec<String> = std::env::args().into_iter().collect();
+    let argv: Vec<String> = std::env::args().collect();
     match argv.len() {
         1 => Ok(Args {
             filepath: None,
@@ -142,7 +142,7 @@ fn action() -> Outcome {
     Ok(output)
 }
 
-const USAGE: &'static str = "
+const USAGE: &str = "
 usage:
   rot [filename] [-s|--shift n]
 ";
